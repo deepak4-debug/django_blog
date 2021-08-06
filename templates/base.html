@@ -1,0 +1,254 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+    {% block title %}
+      
+    {% endblock title %}
+      </title>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+    <style>
+        /* this for post-detail page*/
+
+        .detail-post-desk{
+            background-color:  #ebebe0; 
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            padding: 20px 35px;
+        }
+
+        .detail-post-desk:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+          }
+
+        @media only screen and (min-width: 650px)  {
+            .detail-post-desk{
+                margin-left:10px;
+            }
+
+            .detail-post-desk.post-by{
+                font-size: x-small;
+            }
+        }
+
+
+        @media only screen and (max-width: 650px)  {
+            .post-by{
+                font-size: x-small;
+            }
+
+            .profile-space{
+                display:none;
+            }
+        }
+
+        
+
+/* Post-detail content(blog content) ends here*/
+
+        
+
+/* Comment form in Post-detail page starts here*/
+       .col-comment-form{
+           margin-top:80px;
+           border-radius: 10%;
+           border-radius: 28px;
+           background: #f2e9e9;
+           padding-left: 70px;
+           padding-top:30px;
+           padding-bottom: 30px;
+              
+       }  
+
+       @media only screen and (max-width: 520px)  {
+        .col-comment-form{
+            padding:25px;
+        }
+       }
+
+
+
+       
+       
+/*Comment in Post-detail page ends here */
+
+
+
+/*Comment_display in Post-detail page starts here */
+.comment-display{
+    padding-top:10px;
+    box-shadow: 4px -4px 10px 0px #199cbb;
+    height: 150px;
+    transition: height 1s ease-out 0s;
+}
+
+.comment-display:hover{
+    height: 180px;
+}
+
+/*Comment_display in Post-detail page ends here */  
+
+
+
+/*flipping card css starts here */ 
+
+.card{
+	width:250px;
+	height:200px;
+    border-radius: 10%;
+	position:relative;
+	-webkit-transform-style:preserve-3d;
+	transform-style:preserve-3d;
+}
+.card-container{
+	-webkit-perspective:1000;
+	-moz-perspective:1000;
+	-o-perspective:1000;
+	perspective:1000;
+	position:relative;
+	width:250px;
+	height:200px;
+    border-radius: 10%;
+}
+.front, .back{
+	width:100%;
+	height:100%;
+	position:absolute;
+	-webkit-backface-visibility:hidden;
+	backface-visibility:hidden;
+	-webkit-transition:-webkit-transform 300ms;
+	transition:-webkit-transform 300ms;
+	transition:transform 300ms;
+	transition:transform 300ms, -webkit-transform 300ms;
+	-webkit-transition-timing-function:ease-in-out;
+	transition-timing-function:ease-in-out;
+	-webkit-transform-origin:center bottom;
+	transform-origin:center bottom;
+    border-radius: 10%;
+}
+.card .front{
+	background:rgb(34, 146, 238);
+    padding-top: 10px;
+	-webkit-transform:rotateY(0deg);
+	transform:rotateY(0deg);
+}
+.card .back{
+	background:rgb(242, 245, 80);
+    padding-top: 10px;
+	-webkit-transform:rotateY(180deg);
+	transform:rotateY(180deg);
+}
+.card:hover .front {
+	-webkit-transform:rotateY(-180deg);
+	transform:rotateY(-180deg);
+}
+.card:hover .back {
+	-webkit-transform:rotateY(0deg);
+	transform:rotateY(0deg);
+}
+
+
+/*flipping card css end here */
+
+    </style>
+
+
+</head>
+<body>
+   
+    <div class="container">
+        <header>
+            <img src="{% static 'images/logo2.png' %}" alt="23andfour logo" class="logo">
+            <nav>
+                <a href="#" class="hide-desktop">
+                    <img src="{% static 'images/ham.svg' %}" alt="toggle menu" class="menu" id="menu">
+                </a>
+
+                <ul class="show-desktop hide-mobile" id="nav">
+                    <li id="exit" class="exit-btn hide-desktop">
+                        <img src="{% static 'images/exit.svg' %}" alt="exit menu">
+                    </li>
+                    <li><a href="{% url 'home' %}">home</a></li>
+                    <li><a href="#blogpost">blog post</a></li>
+                    <li><a href="#">about</a></li>
+                    <li><a href="#contact">contact</a></li>
+                </ul>
+            </nav>
+        </header>
+       <br><br>
+       {% block content %}
+         
+
+       {% endblock content %}
+      
+        
+       <br><br><br><br>
+        <footer>
+          <div class="" id="contact" style="width:100%;left:0; bottom:0;">
+              <div class="container">
+                  <a href="#">
+                      <img src="{% static 'images/logo2.png' %}" class="logo" alt="logo">
+                  </a>
+                  <p class="address">Deepak Bhattarai, <br>Thimphu, Bhutan <br> Contact:+97517450798</p>
+                  <ul class="footer-links">
+                      <li><a href="#">Terms of Service</a></li>
+                      <li><a href="#">Privacy Policy</a></li>
+                  </ul>
+              </div>
+          </div>
+      </footer>
+ <script>
+    var menu = document.getElementById('menu');
+    var nav = document.getElementById('nav');
+    var exit = document.getElementById('exit');
+
+    menu.addEventListener('click', function(e) {
+        nav.classList.toggle('hide-mobile');
+        e.preventDefault();
+    });
+
+    exit.addEventListener('click', function(e) {
+        nav.classList.add('hide-mobile');
+        e.preventDefault();
+    });
+
+     var i = 0;
+     var images =[];
+     var time = 3000;
+     
+     images[0]= "{% static 'images/codeimg1.svg' %}"
+     images[1]= "{% static 'images/codeimg2.svg' %}"
+     images[2]= "{% static 'images/codeimg3.svg' %}"
+     images[3]= "{% static 'images/codeimg4.svg' %}"
+     
+     function changeImg(){
+         document.slide.src = images[i];
+        
+         if (i < images.length - 1){
+             i++;
+         } else {
+             i = 0;
+         }
+          setTimeout("changeImg()", time);
+        }
+    window.onload = changeImg;
+     
+
+ </script>
+      <script src="{% static 'main.js' %}"></script>
+      <script src="{% static 'bootstrap/js/jquery.min.js' %"></script>
+      <script src="{% static 'bootstrap/js/bootstrap.min.js' %"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+  </html>

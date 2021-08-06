@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    Deepak Bhattarai
+{% endblock title %}
+    
+
+{% block content %}
+    
+
+        <section>
+           <div class="row profile-section">
+               <div class="col-lg-6 my-profile">
+                <figure class="profile">
+                    <img src="{% static 'images/profile_pic.png' %}" alt="User testimonial picture" class="profile-pic">
+                    <figcaption>- Deepak Bhattarai</figcaption>
+                    <blockquote>Hello, I am Deepak Bhattarai. I am interested in learning coding, sharing my ideas and teaching coding. You can read and share my articles on following post. Comment your thoughts as well.</blockquote>
+                   <div class="social-link">
+                    <br><h5>You can follow me on:</h5>
+                    <a href=""><i class="fab fa-github"></i> Github</a>
+                    <br><a href=""><i class="fab fa-facebook"></i> facebook</a>
+                  </div>
+                </figure>
+               </div>
+               <!--<div class="col-md-1 profile-space"></div>-->
+         <div class="col-lg-6"> 
+            <img name= 'slide'  alt="server graphic" class="server" style="width:300px;height:300px">
+        </div>
+        </div>
+
+           <div class="row">
+            <h1>Well come to my Blog, JimmyCode. Let's us learn coding</h1>
+            <p class="subhead">This is JimmyCode, you can read articles and tutorial related to coding specifically python and it's frame work. Python is really easy to Learn and it is fun while coding in python because you can do a lots of amazing stuffs with python.Starting from simple web application to machine learning, data science and lot more. </p>
+           </div>
+            <img src="{% static 'images/scroll.svg' %}" alt="scroll down" class="scroll hide-mobile show-desktop">
+        </section>
+    
+
+    {% for post in post_list %}
+    <div class="gray-container" id="blogpost">
+        <div class="container">
+            <div class="row post-container">
+                <div class="col-lg-4">
+                   <!--<img src="{% static 'images/c2.jpg' %}" class="rounded float-start img-fluid" alt="...">-->
+                   <!--flipping card starts here-->
+                   <div class="card-container">
+                    <div class="card float-start img-fluid">
+                        <div class="front">
+                            <h4>Well come to JimmyCode</h4><br>
+                            <p>Learn to code python!</p>
+                        </div>
+                        <div class="back">
+                            <p>Dark side of the moon</p>
+                        </div>
+                    </div>
+                </div>
+                <!--flipping card ends here-->
+
+                </div>
+                <div class="col-lg-8 padding-left">
+                    <span><h4 class="post-head">{{post.title}}</h4></span><br>
+                    <span class="post-by">Posted by: <i class="far fa-user"></i> {{ post.author }} <i class="far fa-clock"> {{ post.created_on }}</i> </span><br><br>
+                    <p class="post-text">{{post.content | slice:": 200" | safe}}......</p> <br>
+                    <a href="{% url 'post_detail' post.slug %}" class="read-more">Read More <i class="fal fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div><br>
+   {% endfor %}
+
+   
+    {% endblock content %}
+    
+  
