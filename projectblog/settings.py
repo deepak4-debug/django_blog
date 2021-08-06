@@ -91,8 +91,6 @@ DATABASES = {
     }
 }
 
-'''
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -101,6 +99,19 @@ DATABASES = {
         'PASSWORD': 'Deepak@02',
         'HOST': 'localhost',
         'PORT': '5433'
+    }
+}
+
+'''
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ec2-54-227-246-76.compute-1.amazonaws.com',
+        'USER': 'iavsdjdawkwxke',
+        'PASSWORD': '3bcf11379b05e7629d374c81ace51cf36ae45243c03114060b8d71f669c75c79',
+        'HOST': 'ec2-54-227-246-76.compute-1.amazonaws.com',
+        'PORT': '5432'
     }
 }
 
