@@ -18,16 +18,15 @@
 
           <!-- comments -->
         {% with comments.count as total_comments %}
-        <div class="float-start">
+        <div class="float-start comment-count">
         <h2>{{ total_comments }} thoughts on {{post.title}}</h2>
         </div>
         {% endwith %}
 
-        <br><br>
+        <br><br><br>
           <!--Comment display starts here--> 
           {% for comment in comments %}
-          <br><br>
-            <div class="row">
+            <div class="row row-comment-display">
                <div class="col-md-10 comment-display">
                   <div class="float-start">
                   <h5><strong><i class="fas fa-user-circle"></i> {{ comment.name }}</strong> on  <i class="fas fa-calendar-alt"></i><span class="card-subtitle mb-2 text-muted" style="font-size:small; padding-top:10px;"> {{ comment.created_on }}</span></h5>

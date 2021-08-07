@@ -59,10 +59,13 @@
                 <!--flipping card ends here-->
 
                 </div>
-                <div class="col-lg-8 padding-left">
-                    <span><h4 class="post-head">{{post.title}}</h4></span><br>
-                    <span class="post-by">Posted by: <i class="far fa-user"></i> {{ post.author }} <i class="far fa-clock"> {{ post.created_on }}</i> </span><br><br>
-                    <p class="post-text">{{post.content | slice:": 200" | safe}}......</p> <br>
+                <div class="col-lg-8">
+                    <br><span><h4 class="post-head">{{post.title}}</h4></span><br>
+                    <span class="post-by float-start">Posted by: <i class="far fa-user"></i> {{ post.author }} <i class="far fa-clock"> {{ post.created_on }}</i> </span>
+                    <br><hr><br>
+                    <div class="float-start">
+                    <p class="post-text float-start" >{{post.content | slice:": 200" | safe}}......</p> 
+                    </div>
                     <a href="{% url 'post_detail' post.slug %}" class="read-more">Read More <i class="fal fa-arrow-circle-right"></i></a>
                 </div>
             </div>
