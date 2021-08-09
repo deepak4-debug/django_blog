@@ -9,7 +9,7 @@
          <div class="row">
             <div class="col-lg-10 detail-post-desk">
                <br><span class="post-by">Posted by: <i class="far fa-user"></i> {{ post.author }} <i class="far fa-clock"></i> {{ post.created_on }}</i> </span><br>
-               <span><h4 class="post-head">{% block title %}{{post.title}}{% endblock title %} </h4></span><br><br>
+               <span><h4 class="post-head"> <strong>{% block title %}{{post.title}}{% endblock title %}</strong></h4></span><br><br>
                <p class="post-text">{{post.content | safe }}</p> <br><br><br>
            </div>
          <!--Main post content ends-->
@@ -19,7 +19,7 @@
           <!-- comments -->
         {% with comments.count as total_comments %}
         <div class="float-start comment-count">
-        <h2>{{ total_comments }} thoughts on {{post.title}}</h2>
+        <h4><strong>{{ total_comments }} thoughts</strong> on {{post.title}}</h4>
         </div>
         {% endwith %}
 

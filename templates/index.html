@@ -42,6 +42,9 @@
     <div class="gray-container" id="blogpost">
         <div class="container">
             <div class="row post-container">
+                <span><h4 class="post-head"><strong>{{post.title}}</strong></h4></span><br>
+                <span class="post-by">Posted by: <i class="far fa-user"></i> {{ post.author }} <i class="far fa-clock"> {{ post.created_on }}</i> </span>
+                <br><hr><br>
                 <div class="col-lg-4">
                    <!--<img src="{% static 'images/c2.jpg' %}" class="rounded float-start img-fluid" alt="...">-->
                    <!--flipping card starts here-->
@@ -57,15 +60,12 @@
                     </div>
                 </div>
                 <!--flipping card ends here-->
-
                 </div>
+
                 <div class="col-lg-8">
-                    <br><span><h4 class="post-head">{{post.title}}</h4></span><br>
-                    <span class="post-by float-start">Posted by: <i class="far fa-user"></i> {{ post.author }} <i class="far fa-clock"> {{ post.created_on }}</i> </span>
-                    <br><hr><br>
                     <div class="float-start">
-                    <p class="post-text float-start" >{{post.content | slice:": 200" | safe}}......</p> 
-                    </div>
+                    <p class="post-text float-start" >{{post.content | slice:": 400" | safe}}......</p> 
+                    </div><br>
                     <a href="{% url 'post_detail' post.slug %}" class="read-more">Read More <i class="fal fa-arrow-circle-right"></i></a>
                 </div>
             </div>

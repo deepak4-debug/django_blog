@@ -206,10 +206,11 @@ transform:rotateY(0deg);
                     <li id="exit" class="exit-btn hide-desktop">
                         <img src="{% static 'images/exit.svg' %}" alt="exit menu">
                     </li>
-                    <li><a href="{% url 'home' %}">home</a></li>
-                    <li><a href="#blogpost">blog post</a></li>
-                    <li><a href="#">about</a></li>
-                    <li><a href="#contact">contact</a></li>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'blogpost' %}#blogpost">Blog post</a></li>
+                    <li><a href="#">Register</a></li>
+                    <li><a href="#">Login</a></li>
+                    <li><a href="{% url 'contact' %}#contact">Contact</a></li>
                 </ul>
             </nav>
         </header>
@@ -227,10 +228,11 @@ transform:rotateY(0deg);
                   <a href="#">
                     <img src="{% static 'images/logofinal.png'%}" class="logo" alt="logo">
                   </a>
-                  <p class="address">Deepak Bhattarai, <br>Thimphu, Bhutan <br> Contact:+97517450798</p>
+                  <p class="address">Deepak Bhattarai, <br>Thimphu, Bhutan <br> Contact:+97517450798 <br> Email:deeforrai450@gmail.com</p>
                   <ul class="footer-links">
                       <li><a href="#">Terms of Service</a></li>
-                      <li><a href="#">Privacy Policy</a></li>
+                      <li><a href="#">Privacy Policy</a></li><br>
+                      <li>All right reserve JimmyCode</li>
                   </ul>
               </div>
           </div>
