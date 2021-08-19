@@ -1,12 +1,14 @@
 from django.urls import path
-from . import views
+from .views import PostListView, PostDetailView, ReplyCommentView
 
 urlpatterns = [
-    path('contact/',views.Postlist.as_view(), name='contact'),
-    path('blogpost/',views.Postlist.as_view(), name='blogpost'),
-    path('<slug:slug>/', views.post_detail, name='post_detail'), 
+    path('post/<int:post_pk>/comment/<int:pk>/reply', ReplyCommentView.as_view(), name='comment-reply'),
+    path('contact/',PostListView.as_view(), name='contact'),
+    path('blogpost/',PostListView.as_view(), name='blogpost'),  
+    path('post/<int:pk>',PostDetailView.as_view(), name='post_detail'), 
+   
+    path('',PostListView.as_view(), name='home'),
     
-    path('',views.Postlist.as_view(), name='home'),
    
     
     #path('<slug:slug>/',views.PostDetail.as_view(), name='post_detail'),    

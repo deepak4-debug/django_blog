@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '94q-lm18172#f&e&guv2=t=v610zs77mtf^ppv%iw8gjc5q19q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -42,10 +42,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    
     'crispy_forms',
     'blog',
-    'ckeditor',
     'django_summernote',
+    
+    #for allauth
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    #'allauth.socialaccount.providers.facebook',
 ]
 
 MIDDLEWARE = [
@@ -80,6 +87,27 @@ TEMPLATES = [
 WSGI_APPLICATION = 'projectblog.wsgi.application'
 
 
+
+#For django_allauth
+AUTHENTICATION_BACKENDS = [
+    
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+   
+]
+
+SITE_ID = 1
+
+#ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
+LOGIN_REDIRECT_URL ='home'
+
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED=True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -102,8 +130,8 @@ DATABASES = {
         'PORT': '5433'
     }
 }
-'''
 
+'''
 
 DATABASES = {
     'default': {
@@ -174,26 +202,28 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 X_FRAME_OPTIONS = 'SAMEORGIN'
 
 
-#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'projectblog.storage.WhiteNoiseStaticFilesStorage'
 
+# Email setting 
+#https://myaccount.google.com/lesssecureapps
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'bhattaraid313@gmail.com'
+EMAIL_HOST_PASSWORD = 'fjsoziibiaamlkjf'
+EMAIL_USE_TLS = 'True'
+#SERVER_EMAIL = 'bhattaraid313@gmail.com'
+#EMAIL_USE_SSL = 'False'
+
+ADMINS = [
+    ('Deepak', 'bhattaraid313@gmail.com'),
+]
 
 
 
 COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
 
 django_heroku.settings(locals())
-
-
-
-
-
-
-
-
-
-
-
 
 
 
