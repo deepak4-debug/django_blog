@@ -48,7 +48,7 @@ class SearchView(ListView):
  '''      
     
 #This is for postlist
-class PostListView(LoginRequiredMixin,View):
+class PostListView(View):
     def get(self, request, *args, **kwargs):
         posts = Post.objects.all().order_by('-created_on')
         paginator = Paginator(posts, 4)
@@ -64,7 +64,7 @@ class PostListView(LoginRequiredMixin,View):
          
     
    #This detail view and comments 
-class PostDetailView(LoginRequiredMixin,View):
+class PostDetailView(View):
     def get(self, request, pk, *args, **kwargs):
         post = Post.objects.get(pk=pk)
         template_name = 'blog/post_detail.html'
@@ -103,7 +103,7 @@ class PostDetailView(LoginRequiredMixin,View):
         return render(request, template_name, context)
 
 #View for replying comment
-class ReplyCommentView(LoginRequiredMixin,View):
+class ReplyCommentView(View):
     def post(self, request, pk, post_pk, *args, **kwargs):
         post = Post.objects.get(pk=post_pk)
         parent_comment = Comment.objects.get(pk=pk)
@@ -157,7 +157,7 @@ class ProfileView(View):
 
 
  # this for Editing profile 
-class ProfileEditView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
+class ProfileEditView(UpdateView):
     model = UserProfile
     fields = ['name','birth_date','bio','location','picture']
     template_name = 'blog/profile_edit.html'

@@ -123,8 +123,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-
+'''
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -135,9 +135,9 @@ DATABASES = {
         'PORT': '5433'
     }
 }
+
+
 '''
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
