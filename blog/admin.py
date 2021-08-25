@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post
+from .models import Post,UserProfile
 from django_summernote.admin import SummernoteModelAdmin
 
 '''
@@ -54,6 +54,6 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 
-
+admin.site.register(UserProfile)
 #class SummerAdmin(SummernoteModelAdmin):
    # summernote_fields = ('content',)

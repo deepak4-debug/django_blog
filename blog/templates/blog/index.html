@@ -9,72 +9,88 @@
 
 {% block content %}
     
-
-        <section>
-           <div class="row profile-section">
-               <div class="col-lg-6 my-profile">
-                <figure class="profile">
-                    <img src="{% static 'images/profile_pic.png' %}" alt="User testimonial picture" class="profile-pic">
-                    <figcaption>- Deepak Bhattarai</figcaption>
-                    <blockquote>Hello, I am Deepak Bhattarai. I am interested in learning coding, sharing my ideas and teaching coding. You can read and share my articles on following post. Comment your thoughts as well.</blockquote>
-                   <div class="social-link">
-                    <br><h5>You can follow me on:</h5>
-                    <a href=""><i class="fab fa-github"></i> Github</a>
-                    <br><a href=""><i class="fab fa-facebook"></i> facebook</a>
-                  </div>
-                </figure>
-               </div>
-               <!--<div class="col-md-1 profile-space"></div>-->
-         <div class="col-lg-6"> 
-            <img name= 'slide'  alt="server graphic" class="server" style="width:300px;height:300px">
+<div class="container">
+    <div class="row mt-4 justify-content-center">
+        <div class="col-md-8 col-sm-12 type-writer text-center">
+            <h4>#Code python</h4>
+            <h6 class="typing" style="display: inline-flex;"></h6>
         </div>
-        </div>
-
-           <div class="row">
-            <h1>Well come to my Blog, JimmyCode. Let's us learn coding</h1>
-            <p class="subhead">This is JimmyCode, you can read articles and tutorial related to coding specifically python and it's frame work. Python is really easy to Learn and it is fun while coding in python because you can do a lots of amazing stuffs with python.Starting from simple web application to machine learning, data science and lot more. </p>
-           </div>
-            <img src="{% static 'images/scroll.svg' %}" alt="scroll down" class="scroll hide-mobile show-desktop">
-        </section>
-    
-
-    {% for post in post_list %}
-    <div class="gray-container" id="blogpost">
-        <div class="container">
-            <div class="row post-container">
-                <span><h4 class="post-head"><strong>{{post.title}}</strong></h4></span><br>
-                <span class="post-by">Posted by: <i class="far fa-user"></i> {{ post.author }} <i class="far fa-clock"> {{ post.created_on }}</i> </span>
-                <br><hr><br>
-                <div class="col-lg-4">
-                   <!--<img src="{% static 'images/c2.jpg' %}" class="rounded float-start img-fluid" alt="...">-->
-                   <!--flipping card starts here-->
-                   <div class="card-container">
-                    <div class="card float-start img-fluid">
-                        <div class="front">
-                            <h4>Well come to JimmyCode</h4><br>
-                            <p>Learn to code python!</p>
-                        </div>
-                        <div class="back">
-                            <p>Dark side of the moon</p>
-                        </div>
-                    </div>
-                </div>
-                <!--flipping card ends here-->
-                </div>
-
-                <div class="col-lg-8">
-                    <div class="float-start">
-                    <p class="post-text float-start" >{{post.content | slice:": 400" | safe}}......</p> 
-                    </div><br>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-7 col-sm-12">
+            <h3 class="text-center">Hello, Well-come to my Blog, DrukCodeAcademy. Let's us learn coding</h3>
+            <hr>
+            <p class="subhead">This is DrukCodeAcademy, you can read articles and tutorial related to coding specifically python and it's frame work. Python is really easy to Learn and it is fun while coding in python because you can do a lots of amazing stuffs with python.Starting from simple web application to machine learning, data science and lot more. </p>
+             <!--Slide starts here-->
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                <img name= 'slide'  alt="server graphic" class="server" style="width:300px;height:300px">
+                </div> 
+            </div>
+             <!--Slide ends here-->
+            <!--Post list starts here-->
+            {% for post in page_obj %}
+            <div class="row" id="blogpost">
+                <div class="col">
+                    <span><h4 class="post-head"><strong>{{post.title}}</strong></h4></span>
+                    <span class="post-by">Posted by: <i class="far fa-user"></i> <strong><a href="{% url 'profile' post.author.profile.pk %}" style="text-decoration: none;">{{ post.author }}</a></strong> <i class="far fa-clock text-muted"> {{ post.created_on }}</i> </span>
+                    <p class="post-text float-start" >{{post.content | slice:": 500" | safe}}......</p> 
                     <a href="{% url 'post_detail' post.pk %}" class="read-more">Read More <i class="fal fa-arrow-circle-right"></i></a>
+                    <hr>
                 </div>
             </div>
-            <hr>
+            {% endfor %}
+            <!--Post list ends here--> 
+            
+            <!--Pagination  starts here-->
+
+            <div class="row">
+                <div class="col text-center">
+                  <div class="pagination">
+                      <span class="step-link">
+                          {% if page_obj.has_previous %}
+                             <a href="?page=1">&laquo;first</a>
+                             <a href="?page={{page_obj.previous_page_number}}">previous</a>  
+                          {% endif %}
+
+                          <span class="current">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+                          {% if page_obj.has_next %}
+                          <a href="?page={{ page_obj.next_page_number }}">next</a>
+                          <a href="?page={{ page_obj.paginator.num_pages }}">last&raquo;</a>   
+                          {% endif %}    
+                      </span>
+                  </div>
+                </div>
+            </div>
+
+            <!--Pagination  ends here-->
         </div>
-    </div><br>
-   {% endfor %}
+
+
+
+        <div class="col-md-1"><!--gap--></div>
+        <!--Sidebar starts here-->
+        <div class="col-md-4 col-sm-12 pt-4" style="border-left:1px solid green;">
+            <div class="input-group mb-3">
+                <button class="btn btn-dark btn-outline-secondary" type="button" id="button-addon1">Subscribe</button>
+                <input type="text" class="form-control" placeholder="youremail@gmail.com" aria-label="Example text with button addon" aria-describedby="button-addon1">
+            </div>
+            {% if user.is_authenticated %}
+            {% else %}
+            <div class="row mt-2">
+                <div class="col">
+                    <button class="btn btn-primary" style="width:300px;"><a href="{% url 'account_signup' %}" style="text-decoration: none; color:white;">SignUp</a></button>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        <!--Sidebar starts here-->
+    </div>
+</div>
+       
 
    
-    {% endblock content %}
+{% endblock content %}
     
   

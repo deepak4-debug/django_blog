@@ -1,0 +1,49 @@
+{% extends 'blog/base.html' %}
+
+
+
+{% block content %}
+
+
+<body style="background-color: rgb(179, 206, 207);">
+  
+
+  <div class="container">
+    <div class="row">
+        <div class="col border-bottom mt-3 text-center">
+          
+          {% if request.user == user %}
+          <h3>Your Profile Information with username <strong>@{{user.username}}</strong></h3>
+          {% else %}
+          <h3>Profile Information with username <strong>@{{user.username}}</strong></h3>
+          {% endif %}
+          <hr>
+          <span class="d-inline"><img src="{{profile.picture.url}}" alt="profile_picture" class="rounded-circle" width="100" height="100" >
+         {% if profile.name %}
+          <h3>{{profile.name}}</h3>  
+          {% endif %}
+          {% if profile.location %}
+          <p><strong>Location: </strong>{{profile.location}}</p> 
+          {% endif %}
+
+          {% if profile.birth_date %}
+          <p> <strong>Date of Birth:</strong> {{profile.birth_date}}</p> 
+          {% endif %}
+
+          {% if profile.bio %}
+          <p> <strong>Bio:</strong> {{profile.bio}}</p> 
+          {% endif %}
+          
+          {% if request.user == user %}
+            <span><i class="fas fa-edit"><a href="{% url 'profile-edit' profile.pk %}"> Edit profile</a></i></span>
+          {% endif %}
+            
+          
+          
+        </div>
+    </div>
+  </div>
+</body>
+    
+{% endblock content %}
+    

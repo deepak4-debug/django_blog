@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     
+    'django_social_share',
+    
     'crispy_forms',
     'blog',
     'django_summernote',
@@ -53,6 +55,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     #'allauth.socialaccount.providers.facebook',
+    #'blog.apps.ModifiedAccountConfig',
+    #'blog.apps.ModifiedSocialAccountConfig',
+   
 ]
 
 MIDDLEWARE = [
@@ -118,8 +123,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-'''
-'''
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -130,8 +135,8 @@ DATABASES = {
         'PORT': '5433'
     }
 }
-
 '''
+
 
 DATABASES = {
     'default': {

@@ -1,95 +1,110 @@
 {% extends 'blog/base.html' %}
-{% load static %}{% load crispy_forms_tags %}
+{% load social_share %}
+{% load static %}
+{% load crispy_forms_tags %}
 
 
 {% block content %}
 
-    
-        <!--Main post content starts-->
-         <div class="row">
-            <div class="col-lg-10 detail-post-desk">
-               <br><span class="post-by">Posted by: <i class="far fa-user"></i> {{ post.author }} <i class="far fa-clock"></i> {{ post.created_on }}</i> </span><br>
-               <span><h4 class="post-head"> <strong>{% block title %}{{post.title}}{% endblock title %}</strong></h4></span><br><br>
-               <p class="post-text">{{post.content | safe }}</p> <br><br><br>
-           </div>
-         <!--Main post content ends-->
-            <div class="col-lg-2"><!--extra column..spacing--></div>
-         </div><br><br>  
+<div class="container mt-4 detail-post-container">
+   <div class="row">
+      <div class="col-md-10">
+         <p class="text-muted"><span class="post-by">Posted by: <i class="far fa-user"></i> <a href="{% url 'profile' post.author.profile.pk %}" style="text-decoration: none;">{{ post.author }}</a> <i class="far fa-clock"></i> {{ post.created_on }}</i> </span></p>
+         <p><span><h4 class="post-head"> <strong>{% block title %}{{post.title}}{% endblock title %}</strong></h4></span></p>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-md-10">
+         <p>{{post.content | safe }}</p> 
+      </div>
+   </div>
 
-          <!--Comment-form Section starts here-->
-          <div class="row comment-form">
-            <div class="col-md-8 col-comment-form">
-               {% if user.is_authenticated  %}
-               <h3 style="float: left; color:green; font-style:bold;" >Leave your Comment</h3><br><br>
-               <form action="" method="post" style="float: left;" name="CommentForm" form-control>
-                {% csrf_token %}
-                {{ form | crispy }}
-                <br><br><button type="submit" class="btn btn-primary btn-md btn-comment" style="float: left;" value="send">Submit</button>
-                </form>
-                {% else %}
-                <p>Please <a href="{% url 'account_signup' %}">Signup</a> to view more such articles and Comment on our post</p>
-                {% endif %}
-            </div>
-            <div class="col-md-4"><!--spaces--></div>
-         </div>
-        <!--Comment-form Section ends here-->
+   <div class="row">
+      <div class="col-md-10 d-inline">
+         <p style="color: green;"> <strong>Please, Consider sharing this article:</strong> </p>      
+            {% post_to_facebook object_or_url " Facebook" "fab fa-facebook so-share" %}            
+            {% post_to_whatsapp  object_or_url " Whatapps" "fab fa-whatsapp so-share" %}      
+            {% post_to_twitter "Python:{{post.title}}" object_or_url " Twitter" "fab fa-twitter so-share" %}       
+            {% send_email "JimmyCode#Python" "Python:{{post.title}}" object_or_url " Email" "fas fa-envelope so-share" %}         
+            {% post_to_telegram "Python:{{post.title}}" object_or_url " Telegram" "fab fa-telegram so-share" %}
+      </div>
+   </div>
 
+</div>
 
-
-          <!-- comments -->
-        {% with comments.count as total_comments %}
-        <div class="float-start comment-count mt-3">
-        <h4><strong>{{ total_comments }} thoughts</strong> on {{post.title}}</h4>
-        </div>
-        {% endwith %}
-
-        <br><br><br>
-          <!--Comment display starts here--> 
-          {% for comment in comments %}
-          {% if comment.is_parent %}
-            <div class="row row-comment-display">
-               <div class="col-md-10 comment-display">
-                  <div class="float-start">
-                  <h5><strong><i class="fas fa-user-circle"></i> {{ comment.author }}</strong> on  <i class="fas fa-calendar-alt"></i><span class="card-subtitle mb-2 text-muted" style="font-size:small; padding-top:10px;"> {{ comment.created_on }} {% if user.is_authenticated %} <i class="fa fa-comments" onclick="commentReplyToggle ('{{ comment.pk }}')"> <span style="color: green;">reply {% endif %}</span></i></span></h5>
-                  </div><br><br> 
-                  <div class="float-start">
-                     <p>{{ comment.comment | linebreaks }}</p>
-                  </div>
-               </div>
-            </div>
-
-            <div class="row justify-content-center mt-3 mb-5 d-none" id="{{ comment.pk }}">
-               <div class="col-md-5 col-sm-12">
-                  <form action="{% url 'comment-reply' post.pk comment.pk %}" method="POST">
-                      {% csrf_token %}
-                      {{ form | crispy}}
-                      <div class="d-grid gap-2 mb-5">
-                          <button class="btn btn-success mt-3">Reply</button>
-                      </div>
-                  </form>
-               </div>
-           </div>
+<div class="container mt-4">
+   <div class="row">
+      <div class="col">
+         {% if user.is_authenticated  %}
+         <h3 style="float: left; color:green; font-style:bold;" >Leave your Comment</h3><br><br>
+         <form action="" method="POST" style="float: left;">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <button type="submit" class="btn btn-primary btn-md btn-comment mt-3" style="float: left;">Submit</button>
+            </form>
+            {% else %}
+            <p>Please <a href="{% url 'account_signup' %}">Signup</a> to view more such articles and Comment on our post</p>
+         {% endif %}
+      </div>
+   </div>
+   <div class="row py-4">
+     <div class="col">
+      {% with comments.count as total_comments %}
+      <h4><strong>{{ total_comments }} Comments</strong> on {{post.title}}</h4>
+      {% endwith %}
+     </div>
+   </div>
+</div>
 
 
-            {% for child_comment in comment.children  %}
-           <div class="row justify-content-center mt-3 mb-5" >
-            <div class="col-md-5 col-sm-12">
-            <p>Replied by: <strong>{{ child_comment.author }}</strong> on <span class="text-muted" style="font-size: x-small;">{{ child_comment.created_on }}</span></p>
-            <p>{{child_comment.comment}}</p>
-            </div>
-        </div>
-         {% endfor %}
-          
-           
-            
-          
-            <br><br>
-         {% endif %}   
-         {% endfor %}
-         <br><br>
-          <!--Comment display ends here-->
-          <br><br><br>
-    
+{% for comment in comments %}
+{% if comment.is_parent %}
+<div class="container">
+   <div class="row mt-2" style="background-color: rgb(229, 235, 238);padding:15px 25px; border-radius:10px;">
+      <div class="col">
+         <h5><strong><i class="fas fa-user-circle"></i> <a href="{% url 'profile' comment.author.profile.pk %}"  style="text-decoration: none;">{{ comment.author }}</a></strong> on  <i class="fas fa-calendar-alt"></i><span class="card-subtitle mb-2 text-muted" style="font-size:small; padding-top:10px;"> {{ comment.created_on }} {% if user.is_authenticated %} <i class="fa fa-comments" onclick="commentReplyToggle ('{{ comment.pk }}')"> <span style="color: green;">reply {% endif %}</span></i></span></h5>
+         <p>{{ comment.comment | linebreaks }}</p>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col">
+        
+      </div>
+   </div>
+   
+
+
+   <div class="row justify-content-center mt-3 mb-5 d-none" id="{{ comment.pk }}">
+      <div class="col-md-5 col-sm-12">
+         <form action="{% url 'comment-reply' post.pk comment.pk %}" method="POST">
+             {% csrf_token %}
+             {{ form | crispy}}
+             <div class="d-grid gap-2 mb-5">
+                 <button class="btn btn-success mt-3">Reply</button>
+             </div>
+         </form>
+      </div>
+  </div>
+
+
+   {% for child_comment in comment.children  %}
+  <div class="row justify-content-center mt-3 mb-5" >
+   <div class="col-md-5 col-sm-12">
+   <p>Replied by: <strong><a  href="{% url 'profile' child_comment.author.profile.pk %}" style="text-decoration: none;">{{ child_comment.author }}</a></strong> on <span class="text-muted" style="font-size: x-small;">{{ child_comment.created_on }}</span></p>
+   <p>{{child_comment.comment}}</p>
+   <hr>
+   </div>
+  </div>
+{% endfor %}
+ 
+
+
+
+</div>
+{% endif %}   
+{% endfor %}
+   
 {% endblock content %}
-    
 
+
+   

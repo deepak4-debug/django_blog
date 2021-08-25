@@ -1,22 +1,70 @@
+from django.db.models.query import QuerySet
 from django.shortcuts import render,get_object_or_404,redirect
+from django.db.models import Q 
+from django.urls import reverse_lazy
 from .forms import CommentForm
 from django.views import View
-from .models import Post, Comment
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from django_searchbar.mixins import SearchBarViewMixin
+from django.views.generic.edit import UpdateView, DeleteView
+from django.views.generic import ListView
+from .models import Post, Comment,UserProfile
+from django.core.paginator import Paginator
 
 
+#This is about me view
+class AboutMe(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'blog/about_me.html')
+
+
+
+ 
+class SearchView(View):
+    def get(self, request, *args, **kwargs):
+        query = self.request.GET.get('query')
+        post_list = Post.objects.filter(
+            Q(title__icontains=query) | Q(content__icontains=query)
+        )
+        
+        context ={
+            'query':query,
+            'post_list':post_list,
+            
+        }
+        return render(request, 'blog/search_post.html', context)
+'''
+class SearchView(ListView):
+    Model = Post
+    template_name = 'blog/search_post.html'
+    
+
+    def get_queryset(self): # new
+        query = self.request.GET.get('query')
+        post_list = Post.objects.filter(
+            Q(title__icontains=query)  #Q(title__icontains=query) | Q(author__icontains=query)
+        )
+        return post_list
+ '''      
+    
 #This is for postlist
-class PostListView(View):
+class PostListView(LoginRequiredMixin,View):
     def get(self, request, *args, **kwargs):
         posts = Post.objects.all().order_by('-created_on')
+        paginator = Paginator(posts, 4)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
        
         context = {
-            'post_list': posts,
+            'page_obj': page_obj,
            
         }
         return render(request, 'blog/index.html', context)
+
+         
     
    #This detail view and comments 
-class PostDetailView(View):
+class PostDetailView(LoginRequiredMixin,View):
     def get(self, request, pk, *args, **kwargs):
         post = Post.objects.get(pk=pk)
         template_name = 'blog/post_detail.html'
@@ -55,7 +103,7 @@ class PostDetailView(View):
         return render(request, template_name, context)
 
 #View for replying comment
-class ReplyCommentView(View):
+class ReplyCommentView(LoginRequiredMixin,View):
     def post(self, request, pk, post_pk, *args, **kwargs):
         post = Post.objects.get(pk=post_pk)
         parent_comment = Comment.objects.get(pk=pk)
@@ -71,6 +119,57 @@ class ReplyCommentView(View):
         return redirect ('post_detail', pk=post_pk )
         
 
+
+
+#This view is for profile
+class ProfileView(View):
+    def get(self, request, pk, *args, **kwargs):
+        profile = UserProfile.objects.get(pk=pk)
+        user = profile.user 
+        posts = Post.objects.filter(author=user).order_by('-created_on')
+        
+        '''followers = profile.followers.all()
+        
+        if len(followers) == 0:
+            is_following = False
+        for follower in followers:
+            if follower == request.user:
+                is_following = True
+                break
+            else:
+                is_following = False
+                
+        number_of_followers = len(followers)'''
+        
+        context = {
+            'user': user,
+            'profile': profile,
+            'posts': posts,
+           # 'number_of_followers':number_of_followers,
+            #'is_following': is_following,
+        }
+    
+        return render(request, 'blog/profile.html', context)
+    
+    
+         
+
+
+
+ # this for Editing profile 
+class ProfileEditView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
+    model = UserProfile
+    fields = ['name','birth_date','bio','location','picture']
+    template_name = 'blog/profile_edit.html'
+    
+    def get_success_url(self):
+        pk = self.kwargs['pk']
+        return reverse_lazy('profile', kwargs={'pk': pk})
+    
+    def test_func(self):
+        profile = self.get_object()
+        return self.request.user == profile.user
+    
 
 
 

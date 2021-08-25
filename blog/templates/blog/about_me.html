@@ -1,0 +1,33 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    
+<div class="container mt-4 ">
+    <div class="row text-center py-4 about-me">
+      <div class="col">
+         <img src="{% static 'images/profile_pic.png' %}" alt="" style="border-radius: 50px;">
+         <div class="row">
+           <div class="col">
+             <h3> I am Deepak Bhattarai and i am the owner of this blog, DrukCodeAcadmy</h3>
+             <p>Your most welcome to read my articles in this blog. I usually post articles related to programming and more specifically python program. If your interested to start learning python, this is great platform to get started. I am a part time coder as i am so much interested in programming and i currently work in Bhutan Power Coporation Ltd as electrical engineer. i have Bachelor Degree Power Engineering from Jigme Namgyel Engineering college.</p>
+              <h4>Here is my Story, how i started coding!</h4>
+              <p>Some of you might be interested to hear my journey in field of programming. Until grade 12 i had no idea what actually coding and programming is, as well as never heard people talking about it. Back than, i remember when my IT teacher gave me his laptop to use, unfortunately it was my first time that i got chance to touch and feel laptop. Guess what? it was quite upsetting and great insult to me that i couldn't operate and get started with laptop computer. so, all it started when i was in college pursuing my degree. That time i was all set to get started with coding as i had brand new laptop and enough basic knowledge to start coding</p>
+           </div>
+         </div>
+         <div class="row">
+           <div class="col">
+            <div>
+              <br><h5>You can follow me on:</h5>
+              <a href="https://github.com/deepak4-debug" style="text-decoration: none;"><i class="fab fa-github"></i> Github</a>
+              <br><a href="https://www.facebook.com/profile.php?id=100011144885561" style="text-decoration: none;"><i class="fab fa-facebook"></i> facebook</a>
+            </div>
+           </div>
+         </div>
+      </div>
+    </div>
+</div>
+
+{% endblock content %}
+    
