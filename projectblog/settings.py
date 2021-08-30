@@ -117,8 +117,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED=True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
-SOCIAL_AUTH_FACEBOOK_KEY = "438233824063583"
-SOCIAL_AUTH_FACEBOOK_SECRET = "c6a3d01224f22377bbdf50abb82ba0ac"
+
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
