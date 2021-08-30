@@ -1,8 +1,15 @@
 {% extends 'blog/base.html' %}
 {% load static %}
 
+
+
+
+
+
 {% block content %}
-<div class="container mt-5 mb-5 search-container">
+
+<div id="loader"></div>
+ <div class="container mt-5 mb-5 search-container">
     <div class="row">
         <div class="col-md-8 py-3 px-5">
             {% if query %}
@@ -25,7 +32,9 @@
             
         </div>
     </div>
-</div>
+</div>   
+
+
     
 {% endblock content %}
     

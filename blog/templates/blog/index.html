@@ -1,9 +1,11 @@
 {% extends 'blog/base.html' %}
 {% load static %}
+{% load socialaccount %}
+{% providers_media_js %}
 
 
 {% block title %}
-    Deepak Bhattarai
+   DrukCodeAcademy
 {% endblock title %}
     
 
@@ -16,6 +18,13 @@
             <h6 class="typing" style="display: inline-flex;"></h6>
         </div>
     </div>
+    
+     <div class="row mt-3 mb-4">
+         <div class="col">
+        <iframe src="https://trinket.io/embed/python/4a4c22e744" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+         </div>
+     </div>
+
     <div class="row mt-3">
         <div class="col-md-7 col-sm-12">
             <h3 class="text-center">Hello, Well-come to my Blog, DrukCodeAcademy. Let's us learn coding</h3>
@@ -35,10 +44,27 @@
                     <span><h4 class="post-head"><strong>{{post.title}}</strong></h4></span>
                     <span class="post-by">Posted by: <i class="far fa-user"></i> <strong><a href="{% url 'profile' post.author.profile.pk %}" style="text-decoration: none;">{{ post.author }}</a></strong> <i class="far fa-clock text-muted"> {{ post.created_on }}</i> </span>
                     <p class="post-text float-start" >{{post.content | slice:": 500" | safe}}......</p> 
-                    <a href="{% url 'post_detail' post.pk %}" class="read-more">Read More <i class="fal fa-arrow-circle-right"></i></a>
-                    <hr>
+                    
                 </div>
             </div>
+            <div class="d-flex flex-row">
+                <a href="{% url 'post_detail' post.pk %}" class="read-more">Read More <i class="fal fa-arrow-circle-right"></i></a>
+                <form action="{% url 'like' post.pk %}" method="POST">
+                   {% csrf_token %}
+                   <input type="hidden" name="next" value="{{request.path}}" >
+                   <button style="background-color: transparent; border:none; box-shadow:none;" type="submit">
+                      <i class="far fa-thumbs-up"><span>{{post.likes.all.count}}</span></i>
+                   </button>
+                </form>
+                <form action="{% url 'dislike' post.pk %}" method="POST">
+                   {% csrf_token %}
+                   <input type="hidden" name="next" value="{{request.path}}" >
+                   <button style="background-color: transparent; border:none; box-shadow:none;" type="submit">
+                      <i class="far fa-thumbs-down"><span>{{post.dislikes.all.count}}</span></i>
+                   </button>
+                </form>
+          </div>
+          <hr>
             {% endfor %}
             <!--Post list ends here--> 
             
@@ -71,7 +97,7 @@
 
         <div class="col-md-1"><!--gap--></div>
         <!--Sidebar starts here-->
-        <div class="col-md-4 col-sm-12 pt-4" style="border-left:1px solid green;">
+        <div class="col-md-4 col-sm-12 mt-5" style="border-left:1px solid green;">
             <div class="input-group mb-3">
                 <button class="btn btn-dark btn-outline-secondary" type="button" id="button-addon1">Subscribe</button>
                 <input type="text" class="form-control" placeholder="youremail@gmail.com" aria-label="Example text with button addon" aria-describedby="button-addon1">
@@ -81,6 +107,10 @@
             <div class="row mt-2">
                 <div class="col">
                     <button class="btn btn-primary" style="width:300px;"><a href="{% url 'account_signup' %}" style="text-decoration: none; color:white;">SignUp</a></button>
+                    <button class="btn btn-secondary mt-2" style="width:300px;"><a href="{% provider_login_url 'facebook' method='oauth2' %}" style="text-decoration: none; color:white;">Login with Facebook</a></button>
+                    <button class="btn btn-dark mt-2" style="width:300px;"><a href="{% provider_login_url 'google' method='oauth2' %}" style="text-decoration: none; color:white;">Login with Google</a></button>
+                    <button class="btn btn-success mt-2" style="width:300px;"><a href="{% provider_login_url 'github' method='oauth2' %}" style="text-decoration: none; color:white;">Login with Github</a></button>
+                    
                 </div>
             </div>
             {% endif %}

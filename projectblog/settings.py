@@ -54,6 +54,10 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.twitter',
+    'allauth.socialaccount.providers.github',
     #'allauth.socialaccount.providers.facebook',
     #'blog.apps.ModifiedAccountConfig',
     #'blog.apps.ModifiedSocialAccountConfig',
@@ -113,6 +117,9 @@ ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED=True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
+SOCIAL_AUTH_FACEBOOK_KEY = "438233824063583"
+SOCIAL_AUTH_FACEBOOK_SECRET = "c6a3d01224f22377bbdf50abb82ba0ac"
+
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -136,8 +143,8 @@ DATABASES = {
     }
 }
 
-
 '''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
