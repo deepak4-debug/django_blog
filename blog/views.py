@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django_searchbar.mixins import SearchBarViewMixin
 from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic import ListView
-from .models import Post, Comment,UserProfile
+from .models import Post, Comment,UserProfile, Basic
 from django.core.paginator import Paginator
 
 
@@ -17,6 +17,13 @@ from django.core.paginator import Paginator
 class AboutMe(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'blog/about_me.html')
+    
+    
+#This is python-content view
+class TableOfContent(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'blog/python_content.html')
+
 
 
 
@@ -236,6 +243,14 @@ class DisLike(LoginRequiredMixin,View):
 
 
 
+class BasicView(View):
+     def get(self, request, *args, **kwargs):
+         basics = Basic.objects.all()
+         context = {
+             'basics': basics
+         }
+         return render(request, 'blog/basics_of_programming.html', context)
+    
 
 '''
 class Postlist(generic.ListView):

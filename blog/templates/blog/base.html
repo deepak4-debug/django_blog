@@ -114,7 +114,22 @@ padding: 20px 35px;
 
 }
 
-
+pre {
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  color: #333;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+code, kbd, pre, samp {
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
 </style> 
  
 </head>
@@ -132,6 +147,9 @@ padding: 20px 35px;
               </li>-->
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'blogpost' %}#blogpost">BlogPost</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'python-content' %}">Python</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'about-me' %}">About me</a>

@@ -78,8 +78,13 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 
-
-
+#Python tutorial
+class Basic(models.Model):
+    basic_programming = models.TextField(blank=True, null=True)
+    numbers = models.TextField(blank=True, null=True)
+    string = models.TextField(blank=True, null=True)
+    basic_list = models.TextField(blank=True, null=True)
+    
 
 
 

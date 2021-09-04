@@ -54,9 +54,9 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
+    #'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.twitter',
+    #'allauth.socialaccount.providers.twitter',
     'allauth.socialaccount.providers.github',
     #'allauth.socialaccount.providers.facebook',
     #'blog.apps.ModifiedAccountConfig',
@@ -231,10 +231,13 @@ ADMINS = [
 ]
 
 
-
+SUMMERNOTE_THEME = 'bs3'  # Show summernote with Bootstrap4
 COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
 
 django_heroku.settings(locals())
+
+
+
 
 
 
