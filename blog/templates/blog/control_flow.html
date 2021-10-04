@@ -5,30 +5,36 @@
 {% block content %}
  
  
-<div class="row mt-4 mx-4" id="basics">
-    {% for basic in basics  %}
+<div class="row mt-4 mx-4" id="if-statements">
+    {% for controlflow in controlflows  %}
     <div class="col-md-8">
     <div class="row" id="basics">
         <div class="col">
-          <p>{{basic.basic_programming | safe }}</p>   
+          <p>{{ controlflow.if_Statements | safe }}</p>   
         </div>
     </div>
     
-    <div class="row" id="numbers">
+    <div class="row" id="for-statements">
         <div class="col">
-          <p>{{basic.numbers | safe }}</p>   
+          <p>{{ controlflow.for_Statements | safe }}</p>   
         </div>
     </div>
      
-    <div class="row" id="string">
+    <div class="row" id="range-function">
         <div class="col">
-          <p>{{basic.string | safe }}</p>   
+          <p>{{ controlflow.range_Function | safe }}</p>   
         </div>
     </div>
 
-    <div class="row" id="list">
+    <div class="row" id="break-continue">
         <div class="col">
-          <p>{{basic.basic_list | safe }}</p>   
+          <p>{{ controlflow.break_and_continue_Statements | safe }}</p>   
+        </div>
+    </div>
+
+    <div class="row" id="pass-statements">
+        <div class="col">
+          <p>{{ controlflow.pass_Statements | safe }}</p>   
         </div>
     </div>
     </div>

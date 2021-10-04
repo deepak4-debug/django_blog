@@ -1,5 +1,6 @@
+from blog.models import ControlFlow
 from django.urls import path
-from .views import PostListView, PostDetailView, ReplyCommentView,ProfileView, ProfileEditView,AboutMe,SearchView,AddLike,DisLike, TableOfContent, BasicView
+from .views import ControlFlowView, PostListView, PostDetailView, ReplyCommentView,ProfileView, ProfileEditView,AboutMe,SearchView,AddLike,DisLike, TableOfContent, BasicView
 
 urlpatterns = [
     path('post/<int:post_pk>/comment/<int:pk>/reply', ReplyCommentView.as_view(), name='comment-reply'),
@@ -15,6 +16,7 @@ urlpatterns = [
     
     path('python_table_of_content/', TableOfContent.as_view(), name='python-content'),
     path('basics_of_programming_in_python/', BasicView.as_view(), name='python-basics'),
+    path('control_flow_tools_in_python/', ControlFlowView.as_view(), name='control-flow'),
    
     path('',PostListView.as_view(), name='home'),
     

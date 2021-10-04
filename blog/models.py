@@ -80,10 +80,26 @@ def save_user_profile(sender, instance, **kwargs):
 
 #Python tutorial
 class Basic(models.Model):
+    title = models.CharField(max_length=20, default='Basics of Python')
     basic_programming = models.TextField(blank=True, null=True)
     numbers = models.TextField(blank=True, null=True)
     string = models.TextField(blank=True, null=True)
     basic_list = models.TextField(blank=True, null=True)
+    
+    def __str_(self):
+        return self.title
+    
+class ControlFlow(models.Model):
+    title = models.CharField(max_length=20, default='Python Control Flow tools')
+    if_Statements = models.TextField(blank=True, null=True)
+    for_Statements = models.TextField(blank=True, null=True)
+    range_Function = models.TextField(blank=True, null=True)
+    break_and_continue_Statements = models.TextField(blank=True, null=True)
+    pass_Statements = models.TextField(blank=True, null=True)
+    
+    def __str_(self):
+        return self.title
+    
     
 
 

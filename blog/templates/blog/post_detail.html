@@ -6,6 +6,16 @@
 
 {% block content %}
 
+
+<div class="icon-bar">
+   {% post_to_facebook object_or_url " Facebook" "fab fa-facebook facebook so-share" %}
+   {% post_to_whatsapp  object_or_url " Whatsapp" "fab fa-whatsapp linkedin so-share" %} 
+   {% post_to_twitter "Python:{{post.title}}" object_or_url " Twitter" "fab fa-twitter twitter so-share" %}
+   {% send_email "JimmyCode#Python" "Python:{{post.title}}" object_or_url " Email" "fas fa-envelope youtube so-share" %}
+   {% post_to_telegram "Python:{{post.title}}" object_or_url " Telegram" "fab fa-telegram google so-share" %}
+ </div>
+
+
 <div class="container mt-4 detail-post-container">
    <div class="row">
       <div class="col-md-10">
@@ -35,18 +45,6 @@
             </button>
          </form>
    </div>
-
-   <div class="row"> 
-      <p style="color: green;"> <strong>Please, Consider sharing this article: </strong> </p>   
-      <div class="d-flex align-items-start">
-            <div class="col">{% post_to_facebook object_or_url " Facebook" "fab fa-facebook so-share" %}</div>            
-            <div class="col">{% post_to_whatsapp  object_or_url " Whatapps" "fab fa-whatsapp so-share" %}</div>    
-            <div class="col">{% post_to_twitter "Python:{{post.title}}" object_or_url " Twitter" "fab fa-twitter so-share" %} </div>      
-            <div class="col">{% send_email "JimmyCode#Python" "Python:{{post.title}}" object_or_url " Email" "fas fa-envelope so-share" %}</div>         
-            <div class="col">{% post_to_telegram "Python:{{post.title}}" object_or_url " Telegram" "fab fa-telegram so-share" %}</div>
-      </div>
-   </div>
-
 </div>
 
 <div class="container mt-4">

@@ -54,8 +54,59 @@ body{
 /*social_share*/
 .so-share{
   text-decoration: none;
+  font-size: small;
   
   }
+
+  .icon-bar {
+    width: 80px;
+    position: fixed;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+  
+  .icon-bar a {
+    display: block;
+    text-align: center;
+    padding: 16px;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 10px;
+    
+  }
+  
+  .icon-bar a:hover {
+    background-color: #000;
+  }
+  
+  .facebook {
+    background: #3B5998;
+    color: white;
+    
+  }
+  
+  .twitter {
+    background: #55ACEE;
+    color: white;
+  }
+  
+  .google {
+    background: #dd4b39;
+    color: white;
+  }
+  
+  .linkedin {
+    background: #007bb5;
+    color: white;
+  }
+  
+  .youtube {
+    background: orange;
+    color: white;
+  }
+
   /*social_share */
 
 .subhead{
@@ -149,7 +200,7 @@ code, kbd, pre, samp {
                 <a class="nav-link" href="{% url 'blogpost' %}#blogpost">BlogPost</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'python-content' %}">Python</a>
+                <a class="nav-link" href="{% url 'python-content' %}">Learn Python</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'about-me' %}">About me</a>

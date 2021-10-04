@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django_searchbar.mixins import SearchBarViewMixin
 from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic import ListView
-from .models import Post, Comment,UserProfile, Basic
+from .models import Post, Comment,UserProfile, Basic, ControlFlow
 from django.core.paginator import Paginator
 
 
@@ -250,6 +250,17 @@ class BasicView(View):
              'basics': basics
          }
          return render(request, 'blog/basics_of_programming.html', context)
+     
+     
+     
+     
+class ControlFlowView(View):
+    def get(self, request, *args, **kwargs):
+        controlflows = ControlFlow.objects.all()
+        context = {
+            'controlflows': controlflows
+        }
+        return render(request, 'blog/control_flow.html', context)
     
 
 '''

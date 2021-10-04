@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post,UserProfile, Basic
+from .models import Post,UserProfile, Basic, ControlFlow
 from django_summernote.admin import SummernoteModelAdmin
 
 '''
@@ -59,6 +59,15 @@ admin.site.register(UserProfile)
    
    
 class BasicAdmin(SummernoteModelAdmin):
+    list_display = ('title',)
     summernote_fields = ('basic_programming', 'numbers', 'string', 'basic_list')
 
 admin.site.register(Basic, BasicAdmin)
+
+
+class ControlFlowAdmin(SummernoteModelAdmin):
+    list_display = ('title',)
+    summernote_fields = ('if_Statements', 'for_Statements', 'range_Function', 'break_and_continue_Statements', 'pass_Statements')
+
+admin.site.register(ControlFlow, ControlFlowAdmin)
+
