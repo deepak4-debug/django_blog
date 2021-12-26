@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Post,UserProfile, Basic, ControlFlow
-from django_summernote.admin import SummernoteModelAdmin
+#from django_summernote.admin import SummernoteModelAdmin
 
 '''
 class PostAdmin(admin.ModelAdmin):
@@ -31,12 +31,18 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 
-class PostAdmin(SummernoteModelAdmin):
+""" class PostAdmin(SummernoteModelAdmin):
     list_display = ('title','status', 'created_on')
     list_filter = ('status', 'created_on')
     search_fields = ['title', 'content']
     
-    summernote_fields = ('content',)
+    summernote_fields = ('content',) """
+    
+    
+class PostAdmin(admin.ModelAdmin):
+        list_display = ('title','status', 'created_on')
+        list_filter = ('status', 'created_on')
+        search_fields = ['title', 'content']
 
 admin.site.register(Post, PostAdmin)
 
@@ -58,16 +64,23 @@ admin.site.register(UserProfile)
    
    
    
-class BasicAdmin(SummernoteModelAdmin):
+""" class BasicAdmin(SummernoteModelAdmin):
     list_display = ('title',)
-    summernote_fields = ('basic_programming', 'numbers', 'string', 'basic_list')
+    summernote_fields = ('basic_programming', 'numbers', 'string', 'basic_list') """
+    
+class BasicAdmin(admin.ModelAdmin):
+        list_display = ('title',)
 
 admin.site.register(Basic, BasicAdmin)
 
 
-class ControlFlowAdmin(SummernoteModelAdmin):
+""" class ControlFlowAdmin(SummernoteModelAdmin):
     list_display = ('title',)
     summernote_fields = ('if_Statements', 'for_Statements', 'range_Function', 'break_and_continue_Statements', 'pass_Statements')
-
+ """
+ 
+class ControlFlowAdmin(admin.ModelAdmin):
+        list_display = ('title',)
+ 
 admin.site.register(ControlFlow, ControlFlowAdmin)
 

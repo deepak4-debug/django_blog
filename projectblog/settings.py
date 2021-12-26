@@ -47,7 +47,9 @@ INSTALLED_APPS = [
     
     'crispy_forms',
     'blog',
-    'django_summernote',
+    #'django_summernote',
+    'ckeditor',
+   'ckeditor_uploader',
     
     #for allauth
     'django.contrib.sites',
@@ -142,8 +144,8 @@ DATABASES = {
     }
 }
 
-
 '''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -191,6 +193,23 @@ USE_L10N = True
 USE_TZ = True
 
 
+#CKeditor customization
+CKEDITOR_CONFIGS = {
+  'default': {
+      'toolbar': 'full',
+      'extraPlugins': ','.join(
+          [
+              'codesnippet','clipboard',
+          ]
+
+      ),
+      'codeSnippet_theme': 'monokai_sublime',
+  },
+}
+
+CKEDITOR_UPLOAD_PATH ='uploads /'
+CKEDITOR_IMAGE_BACKEND ="pillow"
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
@@ -225,6 +244,14 @@ EMAIL_HOST_PASSWORD = 'fjsoziibiaamlkjf'
 EMAIL_USE_TLS = 'True'
 #SERVER_EMAIL = 'bhattaraid313@gmail.com'
 #EMAIL_USE_SSL = 'False'
+
+#SUMMERNOTE_THEME = 'bs4'  # Show summernote with Bootstrap4
+
+
+
+
+
+
 
 ADMINS = [
     ('Deepak', 'bhattaraid313@gmail.com'),

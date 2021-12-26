@@ -4,6 +4,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
+
 
 
 STATUS =(
@@ -15,7 +18,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
     updated_on = models.DateTimeField(auto_now=True)
-    content = models.TextField(blank=True, null=True)
+    content = RichTextUploadingField(blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
     likes = models.ManyToManyField(User, blank=True, related_name='likes')
@@ -81,21 +84,21 @@ def save_user_profile(sender, instance, **kwargs):
 #Python tutorial
 class Basic(models.Model):
     title = models.CharField(max_length=20, default='Basics of Python')
-    basic_programming = models.TextField(blank=True, null=True)
-    numbers = models.TextField(blank=True, null=True)
-    string = models.TextField(blank=True, null=True)
-    basic_list = models.TextField(blank=True, null=True)
+    basic_programming = RichTextUploadingField(blank=True, null=True)
+    numbers = RichTextUploadingField(blank=True, null=True)
+    string = RichTextUploadingField(blank=True, null=True)
+    basic_list = RichTextUploadingField(blank=True, null=True)
     
     def __str_(self):
         return self.title
     
 class ControlFlow(models.Model):
     title = models.CharField(max_length=20, default='Python Control Flow tools')
-    if_Statements = models.TextField(blank=True, null=True)
-    for_Statements = models.TextField(blank=True, null=True)
-    range_Function = models.TextField(blank=True, null=True)
-    break_and_continue_Statements = models.TextField(blank=True, null=True)
-    pass_Statements = models.TextField(blank=True, null=True)
+    if_Statements = RichTextUploadingField(blank=True, null=True)
+    for_Statements = RichTextUploadingField(blank=True, null=True)
+    range_Function = RichTextUploadingField(blank=True, null=True)
+    break_and_continue_Statements = RichTextUploadingField(blank=True, null=True)
+    pass_Statements = RichTextUploadingField(blank=True, null=True)
     
     def __str_(self):
         return self.title
